@@ -1,26 +1,6 @@
 {
-  "name": "hide-and-squeak",
-  "version": "0.1.0",
-  "description": "Run your own large-scale IRL hide and seek game",
-  "type": "module",
-  "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview --port 5000",
-    "generate-icons": "pwa-assets-generator"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@vite-pwa/assets-generator": "^1.0.0",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.7",
-    "vite-plugin-pwa": "^0.12.0",
-    "voby-vite": "^1.0.0"
-  },
-  "dependencies": {
-    "voby": "*"
-  },
-  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
   "packageManager": "yarn@4.9.2"
 }
