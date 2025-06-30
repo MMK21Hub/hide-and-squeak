@@ -12,10 +12,10 @@ export default defineConfig({
       srcDir: "./",
       filename: "sw.js",
       manifest: {
-        name: "My Voby App",
-        short_name: "Voby App",
-        description: "My Super Fast Voby App",
-        theme_color: "#FFF6DB",
+        name: "Hide and Squeak",
+        short_name: "Hide and Squeak",
+        description: "Run your own large-scale IRL hide and seek game",
+        // theme_color: "#FFF6DB", TODO
         start_url: "/?source=pwa",
         icons: [
           {

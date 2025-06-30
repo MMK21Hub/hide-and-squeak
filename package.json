@@ -1,7 +1,7 @@
 {
   "name": "hide-and-squeak",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Run your own large-scale IRL hide and seek game",
   "type": "module",
   "scripts": {
     "start": "vite",
