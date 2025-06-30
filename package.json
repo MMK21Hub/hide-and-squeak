@@ -1,0 +1,24 @@
+{
+  "name": "hide-and-squeak",
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview --port 5000"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^2.9.7",
+    "vite-plugin-pwa": "^0.12.0",
+    "voby-vite": "^1.0.0"
+  },
+  "dependencies": {
+    "voby": "*"
+  },
+  "private": true,
+  "packageManager": "yarn@4.9.2"
+}
