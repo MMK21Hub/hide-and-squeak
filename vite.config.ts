@@ -1,6 +1,6 @@
-import { defineConfig } from "vite";
-import voby from "voby-vite";
-import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig } from "vite"
+import voby from "voby-vite"
+import { VitePWA } from "vite-plugin-pwa"
 
 export default defineConfig({
   plugins: [
@@ -19,17 +19,22 @@ export default defineConfig({
         start_url: "/?source=pwa",
         icons: [
           {
-            src: "/pwa-logos/pwa-192x192.png",
+            src: "pwa-64x64.png",
+            sizes: "64x64",
+            type: "image/png",
+          },
+          {
+            src: "pwa-192x192.png",
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "/pwa-logos/pwa-512x512.png",
+            src: "pwa-512x512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/pwa-logos/pwa-512x512.png",
+            src: "maskable-icon-512x512.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "maskable",
@@ -38,4 +43,4 @@ export default defineConfig({
       },
     }),
   ],
-});
+})

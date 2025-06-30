@@ -7,10 +7,12 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview --port 5000"
+    "serve": "vite preview --port 5000",
+    "generate-icons": "pwa-assets-generator"
   },
   "license": "MIT",
   "devDependencies": {
+    "@vite-pwa/assets-generator": "^1.0.0",
     "typescript": "^4.6.4",
     "vite": "^2.9.7",
     "vite-plugin-pwa": "^0.12.0",

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+
+    /* Bundler (Vite) stuff */
+    "moduleResolution": "bundler",
+    "noEmit": true,
+
+    /* Voby stuff */
+    "jsx": "preserve",
+    "jsxImportSource": "voby",
+    "types": ["vite/client"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
