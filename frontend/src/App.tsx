@@ -1,29 +1,21 @@
-import { $ } from "voby"
+import BottomNavigation from "./BottomNavigation"
 
 function App(): JSX.Element {
-  const count = $(0)
-  const increment = () => count((value) => value + 1)
-
   return (
-    <div>
-      <header>
-        <p>
-          <button type="button" onClick={increment}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          href="https://github.com/vobyjs/voby"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Voby
-        </a>
-      </header>
-    </div>
+    <>
+      <h1 class="sr-only">Marvellous mapping machine</h1>
+      <div class="content flex flex-col h-full justify-between">
+        <div id="screens" class="overflow-y-auto">
+          <div class="screen" data-screen="game" id="active-screen">
+            AAAA
+          </div>
+          <div class="screen" data-screen="map">
+            BBB
+          </div>
+        </div>
+        <BottomNavigation screens={["game", "map"]} />
+      </div>
+    </>
   )
 }
 
