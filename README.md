@@ -10,12 +10,34 @@ Currently a work in progress.
 
 1. Clone the repository
 2. `yarn install` in the repository's directory
-3. Start the backend server with `yarn workspace hide-and-squeak-server start`
-   - Leave this running in the background
-   - Restart the command if you make changes to the backend code
-   - Test it by going to <http://localhost:3010/ping>
-4. Also start the frontend development server with `yarn workspace hide-and-squeak dev`
-   - Live reload will be available
+
+### Start the database
+
+Any PostgreSQL database will do. I'd recommend spinning one up with Docker:
+
+```bash
+docker run --name hide-and-squeak-db \
+  -e POSTGRES_PASSWORD=postgres \
+  -e POSTGRES_USER=postgres \
+  -e POSTGRES_DB=hide-and-squeak \
+  -p 5432:5432 \
+  -v pgdata:/var/lib/postgresql/data \
+  -d postgres:17
+```
+
+### Start the backend server
+
+Start the backend server with `yarn workspace hide-and-squeak-server start`
+
+- Leave this running in the background
+- Restart the command if you make changes to the backend code
+- Test it by going to <http://localhost:3010/ping>
+
+### Start the frontend development server
+
+Also start the frontend development server with `yarn workspace hide-and-squeak dev`
+
+- Live reload will be available
 
 ## AI usage statement
 
