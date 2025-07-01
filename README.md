@@ -6,7 +6,7 @@ Imagine an epic hide-and-seek game with your friends, that takes place across a 
 
 Currently a work in progress.
 
-## Development instructions
+## Development setup
 
 1. Clone the repository
 2. `yarn install` in the repository's directory
@@ -25,6 +25,15 @@ docker run --name hide-and-squeak-db \
   -d postgres:17
 ```
 
+### Create a `.env` file for the backend
+
+Create the file `backend/.env` and use it to specify configuration for your development environment:
+
+```bash
+# Adjust if you're using a different database setup to the one above
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/hide-and-squeak"
+```
+
 ### Start the backend server
 
 Start the backend server with `yarn workspace hide-and-squeak-server start`
@@ -39,11 +48,21 @@ Also start the frontend development server with `yarn workspace hide-and-squeak 
 
 - Live reload will be available
 
+## Development tips
+
+### Updating the database schema
+
+Edit `backend/prisma/schema.prisma`. Then:
+
+- Run `yarn run db:push` to update the database
+- Run `yarn run db:studio` to examine the database contents using Prisma Studio (web UI)
+
 ## AI usage statement
 
 The following kinds of AI assistance have been used to for this project:
 
 - GitHub Copilot's tab-completion and edit predictions
 - Asking ChatGPT to compare different available framework/library/other technology choices
+- ChatGPT scaffolded a basic `schema.prisma` file which was then modified
 
 None of the prose in the app, or documentation, has been written or rewritten by AI.
