@@ -23,11 +23,14 @@ const appRouter = router({
       const { input } = opts
       const matchedGame = await prisma.game.findUnique({
         where: { code: input.code },
+        include: {
+          players: true,
+        },
       })
       if (!matchedGame)
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: `Game with code ${input.code} not found`,
+          message: `Game with code "${input.code}" not found`,
         })
       if (!matchedGame.active)
         throw new TRPCError({
