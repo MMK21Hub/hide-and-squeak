@@ -1,10 +1,12 @@
 import { defineConfig } from "vite"
 import voby from "voby-vite"
 import { VitePWA } from "vite-plugin-pwa"
+import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
   plugins: [
     voby(),
+    tailwindcss(),
     VitePWA({
       strategies: "injectManifest",
       registerType: "autoUpdate",
@@ -15,7 +17,7 @@ export default defineConfig({
         name: "Hide and Squeak",
         short_name: "Hide and Squeak",
         description: "Run your own large-scale IRL hide and seek game",
-        // theme_color: "#FFF6DB", TODO
+        theme_color: "#fdc700",
         start_url: "/?source=pwa",
         icons: [
           {
