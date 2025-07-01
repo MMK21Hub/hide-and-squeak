@@ -22,5 +22,6 @@ Currently a work in progress.
 The following kinds of AI assistance have been used to for this project:
 
 - GitHub Copilot's tab-completion and edit predictions
+- Asking ChatGPT to compare different available framework/library/other technology choices
 
 None of the prose in the app, or documentation, has been written or rewritten by AI.
