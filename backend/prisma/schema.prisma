@@ -14,7 +14,7 @@ datasource db {
 model Game {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-  code      String
+  code      String   @unique
   active    Boolean  @default(true)
   players   Player[]
 }
