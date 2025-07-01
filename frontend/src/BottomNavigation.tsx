@@ -1,7 +1,12 @@
 import "./screens.css"
 import { $, For, useEffect, useMemo } from "voby"
 
-function BottomNavigation({ screens }: { screens: string[] }) {
+export interface Screen {
+  label: string
+  icon: JSX.Element | SVGElement
+}
+
+function BottomNavigation({ screens }: { screens: Screen[] }) {
   function handleClick(event: MouseEvent) {
     // Get the button element that was clicked on
     const eventTarget = event.target as HTMLElement
@@ -16,10 +21,10 @@ function BottomNavigation({ screens }: { screens: string[] }) {
 
   // Source of truth for the current active screen.
   const defaultScreen = screens[0]
-  const activeScreen = $(defaultScreen)
+  const activeScreen = $(defaultScreen.label)
   // A map of botton names to observables representing their active state
   const bottomBarButtons = Object.fromEntries(
-    screens.map((name) => [name, useMemo(() => activeScreen() === name)])
+    screens.map(({ label }) => [label, useMemo(() => activeScreen() === label)])
   )
   // e.g. appending #Route to the URL should set the default screen to the Route screen
   const screenFromHash = window.location.hash.slice(1)
