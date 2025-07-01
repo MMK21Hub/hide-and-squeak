@@ -1,0 +1,21 @@
+{
+  "name": "hide-and-squeak-server",
+  "packageManager": "yarn@4.9.2",
+  "author": "MMK21",
+  "main": "src/main.ts",
+  "description": "Backend for the Hide and Squeak app",
+  "devDependencies": {
+    "@types/node": "^24.0.8",
+    "typescript": "^5.8.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "start": "tsc && node dist/main.js"
+  },
+  "dependencies": {
+    "@trpc/server": "^11.4.3",
+    "cors": "^2.8.5",
+    "zod": "^3.25.67"
+  }
+}

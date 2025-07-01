@@ -1,6 +1,7 @@
 {
   "workspaces": [
-    "frontend"
+    "frontend",
+    "backend"
   ],
   "packageManager": "yarn@4.9.2"
 }

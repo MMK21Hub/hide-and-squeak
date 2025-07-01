@@ -1,9 +1,15 @@
-function handleGameJoin(event: SubmitEvent) {
+import { trpc } from "./trpc"
+
+async function handleGameJoin(event: SubmitEvent) {
   event.preventDefault()
   const form = event.target as HTMLFormElement
   const gameCode = new FormData(form).get("gameCode")
+  const ping = await trpc.ping.query()
   alert(
-    `You'd be joining game code "${gameCode}" once that feature is ready :)`
+    `\
+Game code: "${gameCode}"
+API ping response: ${ping}
+`
   )
 }
 
