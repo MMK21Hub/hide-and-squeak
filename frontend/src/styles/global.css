@@ -18,10 +18,10 @@ body {
   default: true;
   prefersdark: false;
   color-scheme: "light";
-  --color-base-100: oklch(100% 0 0);
-  --color-base-200: oklch(97% 0 0);
-  --color-base-300: oklch(92% 0 0);
-  --color-base-content: oklch(20% 0 0);
+  --color-base-100: oklch(95% 0.038 75.164);
+  --color-base-200: oklch(90% 0.076 70.697);
+  --color-base-300: oklch(83% 0.128 66.29);
+  --color-base-content: oklch(42% 0.095 57.708);
   --color-primary: oklch(85% 0.199 91.936);
   --color-primary-content: oklch(28% 0.066 53.813);
   --color-secondary: oklch(75% 0.183 55.934);
