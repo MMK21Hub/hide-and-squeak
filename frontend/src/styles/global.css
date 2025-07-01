@@ -1,6 +1,18 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+html,
+body {
+  @apply h-full;
+}
+
+@layer utilities {
+  /*.h-full-minus-dock {
+     // Bottom navbar height is (4rem + env(safe-area-inset-bottom))) 
+    height: calc(100% - 4rem - env(safe-area-inset-bottom));
+  } */
+}
+
 @plugin "daisyui/theme" {
   name: "squeaky-light";
   default: true;
