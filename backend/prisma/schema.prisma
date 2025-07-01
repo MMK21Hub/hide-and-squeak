@@ -25,6 +25,8 @@ model Player {
   gameId  String
   game    Game     @relation(fields: [gameId], references: [id])
   squeaks Squeak[]
+
+  @@unique([name, gameId])
 }
 
 model Squeak {

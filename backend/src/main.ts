@@ -37,6 +37,14 @@ const appRouter = router({
           code: "FORBIDDEN",
           message: `Game is no longer active`,
         })
+      const duplicatePlayer = matchedGame.players.find(
+        (player) => player.name.toLowerCase() === input.username.toLowerCase()
+      )
+      if (duplicatePlayer)
+        throw new TRPCError({
+          code: "CONFLICT",
+          message: `Player with username "${input.username}" already exists in the game`,
+        })
       const newPlayer = await prisma.player.create({
         data: {
           name: input.username,
