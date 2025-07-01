@@ -13,6 +13,7 @@ Currently a work in progress.
 3. Start the backend server with `yarn workspace hide-and-squeak-server start`
    - Leave this running in the background
    - Restart the command if you make changes to the backend code
+   - Test it by going to <http://localhost:3010/ping>
 4. Also start the frontend development server with `yarn workspace hide-and-squeak dev`
    - Live reload will be available
 
