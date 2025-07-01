@@ -23,7 +23,7 @@ function BottomNavigation({ screens }: { screens: Screen[] }) {
   const defaultScreen = screens[0]
   const activeScreen = $(defaultScreen.label)
   // A map of botton names to observables representing their active state
-  const bottomBarButtons = Object.fromEntries(
+  const bottomNavButtons = Object.fromEntries(
     screens.map(({ label }) => [label, useMemo(() => activeScreen() === label)])
   )
   // e.g. appending #Route to the URL should set the default screen to the Route screen
@@ -52,8 +52,12 @@ function BottomNavigation({ screens }: { screens: Screen[] }) {
 
   return (
     <div class="dock" onClick={handleClick}>
-      <For values={Object.entries(bottomBarButtons)}>
-        {([name, active]) => <BottomBarButton active={active} name={name} />}
+      <For values={Object.entries(bottomNavButtons)}>
+        {([currentLabel, active]) => {
+          const screen = screens.find(({ label }) => label === currentLabel)
+          if (!screen) throw new Error(`No screen found for ${currentLabel}`)
+          return <BottomBarButton active={active} screen={screen} />
+        }}
       </For>
     </div>
   )
@@ -61,48 +65,15 @@ function BottomNavigation({ screens }: { screens: Screen[] }) {
 
 function BottomBarButton({
   active,
-  name,
+  screen,
 }: {
   active: () => boolean
-  name: string
+  screen: Screen
 }) {
   return (
     <button class={() => (active() ? "dock-active" : "")}>
-      <svg
-        class="size-[1.2em]"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-      >
-        <g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt">
-          <polyline
-            points="1 11 12 2 23 11"
-            fill="none"
-            stroke="currentColor"
-            stroke-miterlimit="10"
-            stroke-width="2"
-          ></polyline>
-          <path
-            d="m5,13v7c0,1.105.895,2,2,2h10c1.105,0,2-.895,2-2v-7"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="square"
-            stroke-miterlimit="10"
-            stroke-width="2"
-          ></path>
-          <line
-            x1="12"
-            y1="22"
-            x2="12"
-            y2="18"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="square"
-            stroke-miterlimit="10"
-            stroke-width="2"
-          ></line>
-        </g>
-      </svg>
-      <span class="dock-label">{name}</span>
+      {screen.icon}
+      <span class="dock-label">{screen.label}</span>
     </button>
   )
 }
