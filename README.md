@@ -22,8 +22,24 @@ docker run --name hide-and-squeak-db \
   -e POSTGRES_DB=hide-and-squeak \
   -p 5432:5432 \
   -v pgdata:/var/lib/postgresql/data \
-  -d postgres:17
+  -d postgis/postgis:17-3.5
 ```
+
+### Initialise the database
+
+Enable the PostGIS extension for the database by opening a `psql` shell:
+
+```bash
+docker exec -it hide-and-squeak-db psql -U postgres
+```
+
+Then run the following SQL command to enable PostGIS:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS postgis;
+```
+
+Exit the shell.
 
 ### Create a `.env` file for the backend
 
