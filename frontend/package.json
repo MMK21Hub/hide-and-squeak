@@ -4,8 +4,8 @@
   "description": "Run your own large-scale IRL hide and seek game",
   "type": "module",
   "scripts": {
-    "start": "vite",
     "dev": "vite",
+    "web:dev": "vite",
     "build": "vite build",
     "serve": "vite preview --port 5000",
     "generate-icons": "pwa-assets-generator"
