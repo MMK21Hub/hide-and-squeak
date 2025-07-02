@@ -59,6 +59,22 @@ function GameScreen(): JSX.Element {
               <button class="btn btn-primary">Join</button>
             </form>
           </TabContent>
+          <TabContent name="create-game">
+            <h2 class="text-4xl text-primary font-bold mb-8">Create game</h2>
+            <form onSubmit={joinGame}>
+              <fieldset class="fieldset mb-8">
+                <legend class="fieldset-legend">Pick a username</legend>
+                <input
+                  required
+                  type="text"
+                  class="input sm:w-md"
+                  name="username"
+                  placeholder="Username"
+                />
+              </fieldset>
+              <button class="btn btn-primary">??</button>
+            </form>
+          </TabContent>
         </Tabs>
       </div>
     </div>
