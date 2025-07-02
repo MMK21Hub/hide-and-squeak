@@ -1,7 +1,7 @@
 /* @refresh reload */
-import { render } from "voby";
+import { render } from "voby"
 
-import "./styles/global.css";
-import App from "./App";
+import "./styles/global.css"
+import App from "./App"
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById("app"))

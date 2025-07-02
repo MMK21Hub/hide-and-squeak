@@ -5,7 +5,12 @@ import tailwindcss from "@tailwindcss/vite"
 
 export default defineConfig({
   plugins: [
-    voby(),
+    voby({
+      hmr: {
+        enabled: process.env.NODE_ENV !== "production",
+        filter: /\.(jsx|tsx)$/,
+      },
+    }),
     tailwindcss(),
     VitePWA({
       strategies: "injectManifest",
