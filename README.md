@@ -6,6 +6,10 @@ Imagine an epic hide-and-seek game with your friends, that takes place across a 
 
 Currently a work in progress.
 
+## Screenshots
+
+![Screenshot of the "Join a game" screen](screenshot.png)
+
 ## Development setup
 
 1. Clone the repository
