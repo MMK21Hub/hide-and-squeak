@@ -61,7 +61,7 @@ export function TabButton(props: {
 export function TabContent(props: {
   name: string
   children: JSX.Child
-  class: JSX.Class
+  class?: JSX.Class
 }) {
   const tabsData = useContext(tabsContext)
   if (!tabsData) throw new Error("`TabContent` must be used within a `Tabs`")
