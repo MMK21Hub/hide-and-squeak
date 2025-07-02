@@ -10,17 +10,13 @@ const tabsContext = createContext<TabsContext>()
 export function Tabs({
   tabsName,
   children,
+  defaultTab,
 }: {
   tabsName: string
   children: JSX.Children
+  defaultTab?: string
 }): JSX.Element {
-  const selectedTab = $<string>(undefined)
-  // useEffect(() => {
-  //   const currentTab = selectedTab()
-  //   if (!currentTab) return
-  //   const targetElement = document.getElementById(currentTab)
-  //   if (!targetElement) return console.warn(`Tabs: No element found`)
-  // })
+  const selectedTab = $<string | undefined>(defaultTab ?? undefined)
 
   return (
     <tabsContext.Provider
@@ -29,7 +25,7 @@ export function Tabs({
         tabsName,
       }}
     >
-      <div class="tabs tabs-box">{children}</div>
+      {children}
     </tabsContext.Provider>
   )
 }
@@ -48,7 +44,7 @@ export function TabButton(props: {
       name={tabsName}
       class="tab"
       aria-label={props.children}
-      selected={isSelected}
+      checked={isSelected}
       onChange={(event) => {
         if (!(event.target instanceof HTMLInputElement)) return
         if (!event.target.checked) return
