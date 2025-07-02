@@ -26,7 +26,7 @@ Existing players: ${response.game.players.map((p) => p.name).join(", ")}`)
 
 function GameScreen(): JSX.Element {
   return (
-    <div class="flex flex-col items-center justify-center align-centre h-full">
+    <div class="flex flex-col items-center py-8 justify-center h-full">
       <div class="">
         <Tabs tabsName="game-screen" defaultTab="join-game">
           <div class="tabs tabs-box w-fit mx-auto mb-8">

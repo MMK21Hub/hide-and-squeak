@@ -8,8 +8,8 @@ function App(): JSX.Element {
     <>
       <div class="content flex flex-col h-full">
         <TopAppBar />
-        <div id="screens" class="overflow-y-auto h-full pb-[4rem]">
-          <div class="screen" data-screen="game" id="active-screen">
+        <div id="screens" class="overflow-y-auto h-full mb-[4rem]">
+          <div class="screen @container" data-screen="game" id="active-screen">
             <GameScreen />
           </div>
           <div class="screen" data-screen="map">
