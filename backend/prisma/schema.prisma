@@ -12,11 +12,14 @@ datasource db {
 }
 
 model Game {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  code      String   @unique
-  active    Boolean  @default(true)
-  players   Player[]
+  id         String                                 @id @default(cuid())
+  createdAt  DateTime                               @default(now())
+  code       String                                 @unique
+  name       String
+  active     Boolean                                @default(true)
+  players    Player[]
+  // Game config
+  gameBounds Unsupported("geometry(Polygon, 3857)")
 }
 
 model Player {

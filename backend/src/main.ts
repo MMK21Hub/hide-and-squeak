@@ -1,9 +1,11 @@
-import { z } from "zod"
+import { z } from "zod/v4"
 import { publicProcedure, router } from "./trpc"
 import { createHTTPServer } from "@trpc/server/adapters/standalone"
 import cors from "cors"
 import { PrismaClient } from "../generated/prisma"
 import { TRPCError } from "@trpc/server"
+import { GeoJSONPolygonSchema } from "zod-geojson"
+import { generateRandomId } from "./util"
 
 const prisma = new PrismaClient()
 
@@ -12,6 +14,33 @@ const appRouter = router({
   ping: publicProcedure.query(() => {
     return `Pong! The time is ${new Date().toISOString()}`
   }),
+  createGame: publicProcedure
+    .input(
+      z.object({
+        name: z.string().min(1).max(128),
+        gameBounds: GeoJSONPolygonSchema,
+      })
+    )
+    .mutation(async ({ input }) => {
+      const gameCode = generateRandomId(6)
+      const geoJSON = JSON.stringify(input.gameBounds)
+      await prisma.$executeRaw`
+        INSERT INTO Game (code, name, gameBounds)
+        VALUES (${gameCode}, ${input.name}, ST_SetSRID(ST_GeomFromGeoJSON(${geoJSON}), 3857))
+      `
+      const addedGame = await prisma.game.findUnique({
+        where: { code: gameCode },
+        include: {
+          players: true,
+        },
+      })
+      if (!addedGame)
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to add game to database",
+        })
+      return addedGame
+    }),
   joinGame: publicProcedure
     .input(
       z.object({
