@@ -5,6 +5,7 @@
   "main": "src/main.ts",
   "description": "Backend for the Hide and Squeak app",
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/node": "^24.0.8",
     "typescript": "^5.8.3"
   },

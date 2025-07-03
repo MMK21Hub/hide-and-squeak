@@ -3540,6 +3540,7 @@ __metadata:
   dependencies:
     "@prisma/client": "npm:6.11.0"
     "@trpc/server": "npm:^11.4.3"
+    "@types/cors": "npm:^2.8.19"
     "@types/node": "npm:^24.0.8"
     cors: "npm:^2.8.5"
     prisma: "npm:^6.11.0"
