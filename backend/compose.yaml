@@ -1,7 +1,6 @@
 services:
   server:
     build:
-      context: ..
-      dockerfile: backend/Dockerfile
+      context: .
     ports:
       - 3010:3010

@@ -3,8 +3,7 @@
 ARG NODE_VERSION=24.1.0
 
 FROM node:${NODE_VERSION}-alpine
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/backend
 
 RUN corepack enable
 # Download dependencies as a separate step to take advantage of Docker's caching.
@@ -12,21 +11,22 @@ RUN corepack enable
 # Leverage a bind mounts to package.json and package-lock.json to avoid having to copy them
 # into this layer.
 RUN --mount=type=bind,source=package.json,target=package.json \
-    --mount=type=bind,source=yarn.lock,target=yarn.lock \
-    --mount=type=bind,source=backend/package.json,target=backend/package.json \
+    --mount=type=bind,source=.yarnrc.yml,target=.yarnrc.yml \
     --mount=type=cache,target=/root/.yarn \
-    yarn workspaces focus hide-and-squeak-server --production
+    yarn install
 
 # Run the application as a non-root user.
+RUN chown -R node:node /usr/src/app
 USER node
 
 # Copy the source files into the image.
-COPY ./backend ./backend
-WORKDIR /usr/src/app/backend
+COPY . .
 
 # Expose the port that the application listens on.
 EXPOSE 3010
 
-# Run the application.
+# Compile the TypeScript code
 RUN yarn build
+# Run the application.
+ENV NODE_ENV=production
 CMD ["node", "dist/main.js"]
