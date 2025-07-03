@@ -1,3 +1,5 @@
+import LeafletMap from "./LeafletMap"
+import { OSMFTileServerLayer } from "./mapLayers"
 import { TabButton, TabContent, Tabs } from "./tabs"
 import { trpc } from "./trpc"
 
@@ -7,7 +9,7 @@ async function joinGame(event: SubmitEvent) {
   const code = new FormData(form).get("gameCode")
   const username = new FormData(form).get("username")
   if (typeof code !== "string" || typeof username !== "string")
-    return console.error("Invalid form data")
+    throw new Error("Invalid form data")
 
   trpc.joinGame
     .mutate({
@@ -22,6 +24,19 @@ Existing players: ${response.game.players.map((p) => p.name).join(", ")}`)
       console.error(error)
       alert("Error: " + error.message)
     })
+}
+
+async function createGame(event: SubmitEvent) {
+  event.preventDefault()
+  const form = event.target as HTMLFormElement
+  const gameName = new FormData(form).get("gameName")
+  const username = new FormData(form).get("username")
+  if (typeof gameName !== "string" || typeof username !== "string")
+    throw new Error("Invalid form data")
+  // trpc.createGame.mutate({
+  //   name: gameName,
+  //   gameBounds: "",
+  // })
 }
 
 function GameScreen(): JSX.Element {
@@ -63,15 +78,27 @@ function GameScreen(): JSX.Element {
             <h2 class="text-4xl text-primary font-bold mb-8">Create game</h2>
             <form onSubmit={joinGame}>
               <fieldset class="fieldset mb-8">
-                <legend class="fieldset-legend">Pick a username</legend>
+                <legend class="fieldset-legend">Game name</legend>
                 <input
                   required
                   type="text"
                   class="input sm:w-md"
-                  name="username"
-                  placeholder="Username"
+                  name="gameName"
+                  placeholder="Game name"
                 />
               </fieldset>
+              <h3 class="text-2xl text-primary font-bold mb-8">
+                Select game boundaries
+              </h3>
+              <LeafletMap
+                class="h-[min(70vh,60rem)] w-[70vw] mb-8 rounded-lg"
+                onMount={(map) => {
+                  map.setView([51, 0], 10)
+                  const tiles = OSMFTileServerLayer()
+                  console.log(tiles)
+                  tiles.addTo(map)
+                }}
+              />
               <button class="btn btn-primary">??</button>
             </form>
           </TabContent>

@@ -1,6 +1,7 @@
 import "leaflet/dist/leaflet.css"
 import L, { Map, MapOptions } from "leaflet"
-import { createDirective, Observable } from "voby"
+import { createDirective } from "voby"
+import "./leafletCustom.css"
 
 const LeafletDirective = createDirective(
   "leaflet",
@@ -12,10 +13,15 @@ const LeafletDirective = createDirective(
   }
 )
 
-function LeafletMap(props: JSX.HTMLAttributes<HTMLDivElement>): JSX.Element {
+function LeafletMap(
+  props: {
+    options?: MapOptions
+    onMount?: (map: Map) => void
+  } & JSX.HTMLAttributes<HTMLDivElement>
+): JSX.Element {
   return (
     <LeafletDirective.Provider>
-      <div use:leaflet {...props}></div>
+      <div use:leaflet={[props.options, props.onMount]} {...props}></div>
     </LeafletDirective.Provider>
   )
 }

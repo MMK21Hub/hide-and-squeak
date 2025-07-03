@@ -1,4 +1,11 @@
-import { $, createContext, Observable, useContext, useMemo } from "voby"
+import {
+  $,
+  createContext,
+  Observable,
+  useContext,
+  useEffect,
+  useMemo,
+} from "voby"
 
 interface TabsContext {
   selectedTab: Observable<string | undefined>
@@ -17,6 +24,10 @@ export function Tabs({
   defaultTab?: string
 }): JSX.Element {
   const selectedTab = $<string | undefined>(defaultTab ?? undefined)
+  useEffect(() => {
+    selectedTab()
+    window.dispatchEvent(new Event("resize"))
+  })
 
   return (
     <tabsContext.Provider

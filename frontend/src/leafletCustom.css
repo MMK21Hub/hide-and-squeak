@@ -1,0 +1,34 @@
+.leaflet-bar {
+  border-radius: 0.5rem;
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.leaflet-touch .leaflet-bar a:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.leaflet-bar a {
+  background-color: var(--color-base-200);
+  color: var(--text-base);
+}
+
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+  background-color: color-mix(
+    in oklab,
+    var(--btn-color, var(--color-base-200)),
+    #000 7%
+  );
+}
+
+.leaflet-container a:focus-visible {
+  outline-color: var(--color-primary);
+  outline-offset: 2px;
+  outline-width: 4px;
+  outline-style: solid;
+}
