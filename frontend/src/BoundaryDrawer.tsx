@@ -21,34 +21,44 @@ function BoundaryDrawer(props: {
     props.boundaryGeoJSON(geoJSONPolygon)
   })
 
+  function clickLeafletButton(selector: string) {
+    const button = mapElement()?.querySelector<HTMLAnchorElement>(selector)
+    if (!button) {
+      console.error(`Failed to find ${selector} button on map`)
+      return
+    }
+    button.click()
+  }
+
   return (
     <>
-      <div class="flex gap-4">
+      <div class="flex gap-4 flex-wrap mb-4">
         <button
           type="button"
-          class="btn btn-accent mb-4"
-          onClick={() => {
-            const drawPolygon = mapElement()?.querySelector<HTMLAnchorElement>(
-              ".leaflet-draw-draw-polygon"
-            )
-            if (!drawPolygon)
-              return console.error("Failed to find draw polygon button")
-            drawPolygon.click()
-          }}
+          class="btn btn-accent"
+          onClick={() => clickLeafletButton(".leaflet-draw-draw-polygon")}
           disabled={() => !!currentPolygon()}
         >
           Draw area
         </button>
         <button
           type="button"
-          class="btn btn-error mb-4"
+          class="btn"
+          onClick={() => clickLeafletButton(".leaflet-draw-edit-edit")}
+          disabled={() => !currentPolygon()}
+        >
+          Edit area
+        </button>
+        <button
+          type="button"
+          class="btn btn-error"
           onClick={() => {
             const polygonToRemove = currentPolygon()
             if (!polygonToRemove) return
             drawnItems.removeLayer(polygonToRemove)
             currentPolygon(undefined)
           }}
-          // disabled={() => !currentPolygon()}
+          disabled={() => !currentPolygon()}
         >
           Delete area
         </button>
