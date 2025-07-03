@@ -1,7 +1,11 @@
+import L, { LatLngExpression } from "leaflet"
 import LeafletMap from "./LeafletMap"
 import { OSMFTileServerLayer } from "./mapLayers"
+import { Polygon } from "geojson"
 import { TabButton, TabContent, Tabs } from "./tabs"
 import { trpc } from "./trpc"
+import BoundaryDrawer from "./BoundaryDrawer"
+import { $, If, useMemo } from "voby"
 
 async function joinGame(event: SubmitEvent) {
   event.preventDefault()
@@ -40,6 +44,9 @@ async function createGame(event: SubmitEvent) {
 }
 
 function GameScreen(): JSX.Element {
+  const boundaryForNewGame = $<Polygon>()
+  const boundaryMissing = useMemo(() => !boundaryForNewGame())
+
   return (
     <div class="flex flex-col items-center py-8 justify-center flex-1">
       <div class="">
@@ -90,16 +97,15 @@ function GameScreen(): JSX.Element {
               <h3 class="text-2xl text-primary font-bold mb-8">
                 Select game boundaries
               </h3>
-              <LeafletMap
-                class="h-[min(70vh,60rem)] w-[70vw] mb-8 rounded-lg"
-                onMount={(map) => {
-                  map.setView([51, 0], 10)
-                  const tiles = OSMFTileServerLayer()
-                  console.log(tiles)
-                  tiles.addTo(map)
-                }}
-              />
-              <button class="btn btn-primary">??</button>
+              <BoundaryDrawer boundaryGeoJSON={boundaryForNewGame} />
+              <div class="flex gap-4 items-center">
+                <button class="btn btn-primary" disabled={boundaryMissing}>
+                  Create game
+                </button>
+                <If when={boundaryMissing}>
+                  <span>Select a boundary above before continuing</span>
+                </If>
+              </div>
             </form>
           </TabContent>
         </Tabs>

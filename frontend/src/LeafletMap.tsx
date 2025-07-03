@@ -2,6 +2,8 @@ import "leaflet/dist/leaflet.css"
 import L, { Map, MapOptions } from "leaflet"
 import { createDirective } from "voby"
 import "./leafletCustom.css"
+import "leaflet-draw"
+import "leaflet-draw/dist/leaflet.draw.css"
 
 const LeafletDirective = createDirective(
   "leaflet",

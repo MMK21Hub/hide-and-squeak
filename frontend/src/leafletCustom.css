@@ -12,7 +12,7 @@
   border-bottom-right-radius: 0.5rem;
 }
 
-.leaflet-bar a {
+/* .leaflet-bar a {
   background-color: var(--color-base-200);
   color: var(--text-base);
 }
@@ -24,7 +24,7 @@
     var(--btn-color, var(--color-base-200)),
     #000 7%
   );
-}
+} */
 
 .leaflet-container a:focus-visible {
   outline-color: var(--color-primary);
