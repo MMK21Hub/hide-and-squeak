@@ -1,0 +1,6 @@
+services:
+  hide-and-squeak:
+    build:
+      context: .
+    ports:
+      - 3010:3010
