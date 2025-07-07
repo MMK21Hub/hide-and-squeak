@@ -6,8 +6,10 @@ FROM node:${NODE_VERSION}-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN corepack enable
-# Leverage a cache mount to /root/.yarn to speed up subsequent builds
+# Leverage a cache mount to /root/.yarn etc to speed up subsequent builds
 RUN --mount=type=cache,target=/root/.yarn \
+    --mount=type=cache,target=.yarn \
+    --mount=type=cache,target=node_modules \
     yarn install
 
 RUN yarn workspace hide-and-squeak build
