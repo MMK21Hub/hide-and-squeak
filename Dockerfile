@@ -29,4 +29,4 @@ USER node
 # Run the application
 EXPOSE 3010
 ENV NODE_ENV=production
-CMD ["node", "dist/main.js"]
+CMD ["node", "backend/main.js"]
