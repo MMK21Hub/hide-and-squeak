@@ -1,7 +1,11 @@
 import { createTRPCClient, httpBatchLink } from "@trpc/client"
 import type { AppRouter } from "hide-and-squeak-server"
 
-const fallbackApiURL = import.meta.env.DEV ? "http://localhost:3010" : null
+const isDev =
+  import.meta.env.DEV ||
+  location.hostname === "localhost" ||
+  location.hostname === "127.0.0.1"
+const fallbackApiURL = isDev ? "http://localhost:3010/trpc" : null
 const API_URL_ENV = "HIDE_AND_SQUEAK_API"
 const apiURL: string | null =
   localStorage.getItem("api_url") ||
