@@ -1,11 +1,14 @@
 import { z } from "zod/v4"
-import { publicProcedure, router } from "./trpc"
-import { createHTTPServer } from "@trpc/server/adapters/standalone"
+import { publicProcedure, router } from "./trpc.js"
 import cors from "cors"
-import { PrismaClient } from "../generated/prisma"
+import { PrismaClient } from "../generated/prisma/index.js"
 import { TRPCError } from "@trpc/server"
 import { GeoJSONPolygonSchema } from "zod-geojson"
-import { generateRandomId } from "./util"
+import { generateRandomId } from "./util.js"
+import { createExpressMiddleware } from "@trpc/server/adapters/express"
+import express from "express"
+import { join as joinPath } from "node:path"
+import { stat } from "node:fs/promises"
 
 const prisma = new PrismaClient()
 
@@ -87,15 +90,42 @@ const appRouter = router({
     }),
 })
 
-const server = createHTTPServer({
-  router: appRouter,
-  middleware: cors(),
-})
+const app = express()
+
+// Set up tRPC API
+app.use(
+  "/trpc",
+  createExpressMiddleware({
+    router: appRouter,
+  })
+)
+
+// Serve the frontend
+const frontendDist = joinPath(
+  import.meta.dirname,
+  "..",
+  "..",
+  "frontend",
+  "dist"
+)
+const frontendDistError = await stat(frontendDist)
+  .then(() => null)
+  .catch((error) => error)
+
+if (!frontendDistError) {
+  app.use(express.static(frontendDist))
+  console.log(`Serving frontend from ${frontendDist}`)
+} else {
+  console.warn(
+    "Warning: Not serving the frontend because the dist directory is not present."
+  )
+  console.warn(`${frontendDistError}`)
+}
 
 const PORT = 3010
 
 try {
-  server.listen(PORT)
+  app.listen(PORT)
   console.log(`Server listening on port ${PORT}`)
 } catch (error) {
   console.error(error)

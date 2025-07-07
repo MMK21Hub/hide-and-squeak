@@ -2,9 +2,9 @@
   "compilerOptions": {
     "strict": true,
     "target": "esnext",
-    "module": "nodenext",
+    "module": "node18",
     "lib": ["ES2024", "DOM"],
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node16",
     "outDir": "./dist",
     "skipLibCheck": true
   }

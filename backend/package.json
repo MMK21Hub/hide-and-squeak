@@ -4,8 +4,10 @@
   "author": "MMK21",
   "main": "src/main.ts",
   "description": "Backend for the Hide and Squeak app",
+  "type": "module",
   "devDependencies": {
     "@types/cors": "^2.8.19",
+    "@types/express": "^5",
     "@types/node": "^24.0.8",
     "typescript": "^5.8.3"
   },
@@ -22,6 +24,7 @@
     "@prisma/client": "6.11.0",
     "@trpc/server": "^11.4.3",
     "cors": "^2.8.5",
+    "express": "^5.1.0",
     "prisma": "^6.11.0",
     "zod": "^3.25.67",
     "zod-geojson": "^1.0.0"
