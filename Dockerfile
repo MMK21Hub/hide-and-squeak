@@ -17,13 +17,12 @@ FROM node:${NODE_VERSION}-alpine
 WORKDIR /usr/src/app
 
 # Copy built files
-COPY --from=builder /app/backend/dist ./backend
-COPY --from=builder /app/frontend/dist ./frontend
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/backend/generated ./backend/generated
+COPY --from=builder --chown=node:node /app/backend/dist ./backend
+COPY --from=builder --chown=node:node /app/frontend/dist ./frontend
+COPY --from=builder --chown=node:node /app/node_modules ./node_modules
+COPY --from=builder --chown=node:node /app/backend/generated ./backend/generated
 
 # Run the application as a non-root user
-RUN chown -R node:node /usr/src/app
 USER node
 
 # Run the application
