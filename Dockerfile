@@ -2,7 +2,7 @@
 
 ARG NODE_VERSION=24.1.0
 
-FROM node:${NODE_VERSION}-alpine AS builder
+FROM node:${NODE_VERSION}-slim AS builder
 WORKDIR /app
 COPY . .
 RUN corepack enable
@@ -15,7 +15,7 @@ RUN --mount=type=cache,target=/root/.yarn \
 RUN yarn workspace hide-and-squeak build
 RUN yarn workspace hide-and-squeak-server build
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-alpine AS runner
 WORKDIR /usr/src/app
 
 # Copy built files
