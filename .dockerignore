@@ -1,3 +1,9 @@
 **/dist
 **/node_modules
+.yarn/install-state.gz
 /database
+
+# Security
+.env
+.env.*
+!backend/.env
