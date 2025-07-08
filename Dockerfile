@@ -6,7 +6,6 @@ FROM node:${NODE_VERSION} AS builder
 WORKDIR /app
 COPY . .
 RUN corepack enable
-RUN yarn cache clean
 # Leverage a cache mount to /root/.yarn etc to speed up subsequent builds
 # RUN --mount=type=cache,target=/root/.yarn \
 #     --mount=type=cache,target=.yarn \
