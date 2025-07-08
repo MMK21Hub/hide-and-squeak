@@ -2,15 +2,19 @@
 
 ARG NODE_VERSION=24.1.0
 
-FROM node:${NODE_VERSION}-slim AS builder
+FROM node:${NODE_VERSION} AS builder
 WORKDIR /app
 COPY . .
 RUN corepack enable
+RUN yarn cache clean
 # Leverage a cache mount to /root/.yarn etc to speed up subsequent builds
-RUN --mount=type=cache,target=/root/.yarn \
-    --mount=type=cache,target=.yarn \
-    --mount=type=cache,target=node_modules \
-    yarn install
+# RUN --mount=type=cache,target=/root/.yarn \
+#     --mount=type=cache,target=.yarn \
+#     --mount=type=cache,target=node_modules \
+RUN \
+    yarn install --inline-builds
+# Generate Prisma client
+RUN yarn run db:generate
 
 RUN yarn workspace hide-and-squeak build
 RUN yarn workspace hide-and-squeak-server build
