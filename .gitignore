@@ -14,6 +14,11 @@ dist-ssr
 **/.yarn/install-state.gz
 backend/generated/prisma
 
+# Security
+.env
+.env.local
+!backend/.env
+
 # Editor directories and files
 !.vscode/extensions.json
 .idea
