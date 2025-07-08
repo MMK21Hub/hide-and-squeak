@@ -19,10 +19,10 @@ FROM node:${NODE_VERSION}-alpine AS runner
 WORKDIR /usr/src/app
 
 # Copy built files
-COPY --from=builder --chown=node:node /app/backend/dist ./backend
-COPY --from=builder --chown=node:node /app/frontend/dist ./frontend
+COPY --from=builder --chown=node:node /app/backend/dist ./backend/dist
+COPY --from=builder --chown=node:node /app/frontend/dist ./frontend/dist
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules
-COPY --from=builder --chown=node:node /app/backend/generated ./generated
+COPY --from=builder --chown=node:node /app/backend/generated ./backend/generated
 
 # Run the application as a non-root user
 USER node
