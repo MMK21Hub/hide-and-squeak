@@ -36,6 +36,8 @@ COPY deployment/entrypoint.sh entrypoint.sh
 # Run the application as a non-root user
 USER node
 
+# Suppress "New version of npm available!" notices
+ENV NO_UPDATE_NOTIFIER=true
 # Run the application
 EXPOSE 3010
 ENV NODE_ENV=production
