@@ -97,6 +97,12 @@ Edit `backend/prisma/schema.prisma`. Then:
 1. In the root of the repo: `docker compose up --build`
 1. Hopefully it builds without errors and the app will work on port 3010
 
+### Publish the Docker image to Docker Hub
+
+1. Build the image with a tag: `docker build -t mmk21/hide-and-squeak-server .`
+2. If you want, tag it with a specific version tag, e.g. `docker tag mmk21/hide-and-squeak-server mmk21/hide-and-squeak-server:v0.1.0`
+3. Upload it: `docker push mmk21/hide-and-squeak-server`
+
 ## AI usage statement
 
 The following kinds of AI assistance have been used to for this project:
