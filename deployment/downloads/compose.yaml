@@ -1,7 +1,7 @@
 # A Docker Compose file that can be used to deploy Hide and Squeak in a production. Can be adjusted to suit the deployment's needs.
 services:
   server:
-    image: # TODO
+    image: mmk21/hide-and-squeak-server:latest
     ports:
       - 3010:3010
     environment:
