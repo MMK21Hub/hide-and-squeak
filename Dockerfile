@@ -21,11 +21,17 @@ RUN yarn workspace hide-and-squeak-server build
 FROM node:${NODE_VERSION}-alpine AS runner
 WORKDIR /usr/src/app
 
+# Add Tini
+RUN apk add --no-cache tini
+ENTRYPOINT ["/sbin/tini", "--"]
+
 # Copy built files
 COPY --from=builder --chown=node:node /app/backend/dist ./backend/dist
 COPY --from=builder --chown=node:node /app/frontend/dist ./frontend/dist
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/backend/generated ./backend/generated
+COPY backend/prisma backend/prisma
+COPY entrypoint.sh entrypoint.sh
 
 # Run the application as a non-root user
 USER node
@@ -33,4 +39,4 @@ USER node
 # Run the application
 EXPOSE 3010
 ENV NODE_ENV=production
-CMD ["node", "backend/dist/main.js"]
+CMD ["sh", "entrypoint.sh"]
