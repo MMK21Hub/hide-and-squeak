@@ -1,8 +1,7 @@
-# Docker Compose file for running a production-like environment during development
+# A Docker Compose file that can be used to deploy Hide and Squeak in a production. Can be adjusted to suit the deployment's needs.
 services:
   server:
-    build:
-      context: .
+    image: # TODO
     ports:
       - 3010:3010
     environment:
@@ -18,8 +17,6 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_DATABASE_NAME}
-    ports:
-      - 5432:5432
     volumes:
       - ./database:/var/lib/postgresql/data
     healthcheck:

@@ -10,6 +10,20 @@ Currently a work in progress.
 
 ![Screenshot of the "Join a game" screen](screenshot.png)
 
+## Deployment guide using Docker
+
+It's recommended to deploy Hide and Squeak using Docker (with Docker Compose).
+
+1. Create a folder for the Docker Compose and config files, e.g. `mkdir hide-and-squeak`
+2. Download the production [`compose.yaml`](deployment/downloads/compose.yaml) file
+3. Download the [`env.example`](deployment/downloads/env.example) file
+4. Rename the `env.example` file to `.env`
+5. Edit the `.env` file, replacing the default database password with a randomly-generated one
+6. Run `docker compose up -d` to start the containers
+7. Optional: Watch the logs with `docker compose logs -f` (the database will perform some initial migrations and then the server should start up after a few seconds)
+
+By default, the app will be served on port 3010 (accessible at <http://localhost:3010>) and the database will stored in a `database` folder next to the `docker-compose.yaml` file. Both of those details can be changed by editing the `compose.yaml` file.
+
 ## Development setup
 
 1. Clone the repository
@@ -77,12 +91,19 @@ Edit `backend/prisma/schema.prisma`. Then:
 - Run `yarn run db:push` to update the database
 - Run `yarn run db:studio` to examine the database contents using Prisma Studio (web UI)
 
+### Test the Dockerfile
+
+1. Create a `.env` file in the root of the repo, using [`deployment/downloads/env.example`](deployment/downloads/env.example) as a template
+1. In the root of the repo: `docker compose up --build`
+1. Hopefully it builds without errors and the app will work on port 3010
+
 ## AI usage statement
 
 The following kinds of AI assistance have been used to for this project:
 
 - GitHub Copilot's tab-completion and edit predictions
 - Asking ChatGPT to compare different available framework/library/other technology choices
+- Asking ChatGPT for help with debugging Docker issues
 - ChatGPT scaffolded a basic `schema.prisma` file which was then modified
 
 None of the prose in the app, or documentation, has been written or rewritten by AI.
