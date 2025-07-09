@@ -31,7 +31,7 @@ COPY --from=builder --chown=node:node /app/frontend/dist ./frontend/dist
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/backend/generated ./backend/generated
 COPY backend/prisma backend/prisma
-COPY entrypoint.sh entrypoint.sh
+COPY deployment/entrypoint.sh entrypoint.sh
 
 # Run the application as a non-root user
 USER node
