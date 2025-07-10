@@ -63,8 +63,8 @@ function GameScreen(): JSX.Element {
       <div class="">
         <Tabs tabsName="game-screen" defaultTab="join-game">
           <div class="tabs tabs-box w-fit mx-auto mb-8">
-            <TabButton for="join-game">Join Game</TabButton>
-            <TabButton for="create-game">Create Game</TabButton>
+            <TabButton for="join-game">Join game</TabButton>
+            <TabButton for="create-game">Create game</TabButton>
           </div>
           <TabContent name="join-game">
             <h2 class="text-4xl text-primary font-bold mb-8">Join a game</h2>
