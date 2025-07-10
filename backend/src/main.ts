@@ -91,6 +91,7 @@ const appRouter = router({
 })
 
 const app = express()
+app.use(cors())
 
 // Set up tRPC API
 app.use(
