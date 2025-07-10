@@ -49,6 +49,8 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
     locateOptions: {
       enableHighAccuracy: true,
     },
+    // Prevent the default alert() that gets shown on location error
+    onLocationError: () => void 0,
   })
 
   return (
