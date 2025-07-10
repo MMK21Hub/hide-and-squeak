@@ -76,7 +76,8 @@ function GameScreen(): JSX.Element {
                   type="text"
                   class="input w-sm sm:w-md"
                   name="gameCode"
-                  placeholder="8EGX"
+                  placeholder="8EG7XD"
+                  autoCapitalize="characters"
                 />
               </fieldset>
               <fieldset class="fieldset mb-8">

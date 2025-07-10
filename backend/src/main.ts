@@ -97,7 +97,7 @@ const appRouter = router({
     }>(async (opts) => {
       const { input } = opts
       const matchedGame = await prisma.game.findUnique({
-        where: { code: input.code },
+        where: { code: input.code.toLowerCase() },
         include: {
           players: true,
         },
