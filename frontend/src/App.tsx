@@ -1,6 +1,6 @@
 import BottomNavigation from "./BottomNavigation"
 import GameScreen from "./GameScreen"
-import { currentGame } from "./globalState"
+import { appState } from "./globalState"
 import { iconMap, iconUserGroup } from "./heroIcons"
 import MapScreen from "./MapScreen"
 import TopAppBar from "./TopAppBar"
@@ -16,7 +16,7 @@ function App(): JSX.Element {
           </div>
           <div class="screen" data-screen="map">
             {() => {
-              const game = currentGame()
+              const game = appState.currentGame
               return game ? (
                 <MapScreen game={game} />
               ) : (

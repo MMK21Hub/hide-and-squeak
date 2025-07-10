@@ -3,7 +3,7 @@ import { TabButton, TabContent, Tabs } from "./tabs"
 import { trpc } from "./trpc"
 import BoundaryDrawer from "./BoundaryDrawer"
 import { $, If, useMemo } from "voby"
-import { currentGame } from "./globalState"
+import { appState } from "./globalState"
 
 function GameScreen(): JSX.Element {
   async function joinGame(event: SubmitEvent) {
@@ -20,7 +20,7 @@ function GameScreen(): JSX.Element {
         username,
       })
       .then((response) => {
-        currentGame(response.game)
+        appState.currentGame = response.game
         alert(`Joined game ${response.game.code}!
 Existing players: ${response.game.players.map((p) => p.name).join(", ")}`)
       })
