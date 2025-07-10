@@ -1,4 +1,5 @@
 import BottomNavigation from "./BottomNavigation"
+import CurrentGameScreen from "./CurrentGameScreen"
 import GameScreen from "./GameScreen"
 import { appState } from "./globalState"
 import { iconMap, iconUserGroup } from "./heroIcons"
@@ -12,7 +13,10 @@ function App(): JSX.Element {
         <TopAppBar />
         <div id="screens" class="overflow-y-auto h-full mb-[4rem]">
           <div class="screen @container" data-screen="game" id="active-screen">
-            <GameScreen />
+            {() => {
+              const game = appState.currentGame
+              return game ? <CurrentGameScreen game={game} /> : <GameScreen />
+            }}
           </div>
           <div class="screen" data-screen="map">
             {() => {
