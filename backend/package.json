@@ -21,6 +21,7 @@
     "db:studio": "prisma studio"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
     "@prisma/client": "6.11.1",
     "@trpc/server": "^11.4.3",
     "cors": "^2.8.5",

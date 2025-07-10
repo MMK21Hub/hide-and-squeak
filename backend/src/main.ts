@@ -4,6 +4,7 @@ import cors from "cors"
 import { PrismaClient } from "../generated/prisma/index.js"
 import { TRPCError } from "@trpc/server"
 import { GeoJSONPolygonSchema } from "zod-geojson"
+import { createId as cuid } from "@paralleldrive/cuid2"
 import { generateRandomId } from "./util.js"
 import { createExpressMiddleware } from "@trpc/server/adapters/express"
 import express from "express"
@@ -28,8 +29,10 @@ const appRouter = router({
       const gameCode = generateRandomId(6)
       const geoJSON = JSON.stringify(input.gameBounds)
       await prisma.$executeRaw`
-        INSERT INTO Game (code, name, gameBounds)
-        VALUES (${gameCode}, ${input.name}, ST_SetSRID(ST_GeomFromGeoJSON(${geoJSON}), 3857))
+        INSERT INTO "Game" ("id", "code", "name", "gameBounds")
+        VALUES (${cuid()}, ${gameCode}, ${
+        input.name
+      }, ST_SetSRID(ST_GeomFromGeoJSON(${geoJSON}), 3857))
       `
       const addedGame = await prisma.game.findUnique({
         where: { code: gameCode },
