@@ -99,9 +99,11 @@ Edit `backend/prisma/schema.prisma`. Then:
 
 ### Publish the Docker image to Docker Hub
 
-1. Build the image with a tag: `docker build -t mmk21/hide-and-squeak-server .`
-2. If you want, tag it with a specific version tag, e.g. `docker tag mmk21/hide-and-squeak-server mmk21/hide-and-squeak-server:v0.1.0`
-3. Upload it: `docker push mmk21/hide-and-squeak-server`
+1. Pick a version number: `export VERSION=v0.1.0`
+2. Build the image: `docker build -t mmk21/hide-and-squeak-server .`
+3. Tag it with the version tag: `docker tag mmk21/hide-and-squeak-server mmk21/hide-and-squeak-server:$VERSION`
+4. Upload the version tag: `docker push mmk21/hide-and-squeak-server:$VERSION`
+5. Upload the `latest` tag: `docker push mmk21/hide-and-squeak-server`
 
 ## AI usage statement
 
