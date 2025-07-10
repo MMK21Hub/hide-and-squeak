@@ -28,6 +28,25 @@ export interface Game {
   players: Player[]
 }
 
+async function getGameBounds(gameId: string) {
+  const gameBoundsQuery = await prisma.$queryRaw<{ gameBounds: string }[]>`
+        SELECT ST_AsGeoJSON("gameBounds") AS "gameBounds"
+        FROM "Game"
+        WHERE "id" = ${gameId}
+      `
+  try {
+    const gameBounds = GeoJSONPolygonSchema.parse(
+      JSON.parse(gameBoundsQuery[0].gameBounds)
+    )
+    return gameBounds
+  } catch (error) {
+    throw new TRPCError({
+      code: "INTERNAL_SERVER_ERROR",
+      message: `Game bounds were not in the expected format: ${error}`,
+    })
+  }
+}
+
 const appRouter = router({
   /** Returns any sort of "pong" response that demonstrates the API is functioning. */
   ping: publicProcedure.query(() => {
@@ -108,14 +127,7 @@ const appRouter = router({
         },
       })
       // We have to get the game bounds separately because polygons are unsupported by Prisma
-      const gameBoundsQuery = await prisma.$queryRaw<{ gameBounds: unknown }[]>`
-        SELECT ST_AsGeoJSON("gameBounds") AS "gameBounds"
-        FROM "Game"
-        WHERE "id" = ${matchedGame.id}
-      `
-      const gameBounds = GeoJSONPolygonSchema.parse(
-        gameBoundsQuery[0].gameBounds
-      )
+      const gameBounds = await getGameBounds(matchedGame.id)
       return {
         player: newPlayer,
         game: {
