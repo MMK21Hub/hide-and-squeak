@@ -1,4 +1,4 @@
-import { Game } from "./globalState"
+import { Game } from "hide-and-squeak-server"
 import LeafletMap from "./LeafletMap"
 import { OSMFTileServerLayer } from "./mapLayers"
 

@@ -1,7 +1,7 @@
 import { $, store } from "voby"
-import { trpc } from "./trpc"
+import { Game } from "hide-and-squeak-server"
 
-export type Game = Awaited<ReturnType<typeof trpc.createGame.mutate>>
+// export type Game = Awaited<ReturnType<typeof trpc.createGame.mutate>>
 
 export type AppState = {
   currentGame: Game | null

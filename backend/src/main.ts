@@ -13,6 +13,21 @@ import { stat } from "node:fs/promises"
 
 const prisma = new PrismaClient()
 
+export interface Player {
+  id: string
+  name: string
+  gameId: string
+}
+
+export interface Game {
+  id: string
+  code: string
+  name: string
+  gameBounds: z.infer<typeof GeoJSONPolygonSchema>
+  active: boolean
+  players: Player[]
+}
+
 const appRouter = router({
   /** Returns any sort of "pong" response that demonstrates the API is functioning. */
   ping: publicProcedure.query(() => {
@@ -25,7 +40,7 @@ const appRouter = router({
         gameBounds: GeoJSONPolygonSchema,
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation<Game>(async ({ input }) => {
       const gameCode = generateRandomId(6)
       const geoJSON = JSON.stringify(input.gameBounds)
       await prisma.$executeRaw`
@@ -45,7 +60,10 @@ const appRouter = router({
           code: "INTERNAL_SERVER_ERROR",
           message: "Failed to add game to database",
         })
-      return addedGame
+      return {
+        gameBounds: input.gameBounds,
+        ...addedGame,
+      }
     }),
   joinGame: publicProcedure
     .input(
@@ -54,7 +72,10 @@ const appRouter = router({
         username: z.string().min(1).max(128),
       })
     )
-    .mutation(async (opts) => {
+    .mutation<{
+      player: Player
+      game: Game
+    }>(async (opts) => {
       const { input } = opts
       const matchedGame = await prisma.game.findUnique({
         where: { code: input.code },
@@ -86,9 +107,21 @@ const appRouter = router({
           gameId: matchedGame.id,
         },
       })
+      // We have to get the game bounds separately because polygons are unsupported by Prisma
+      const gameBoundsQuery = await prisma.$queryRaw<{ gameBounds: unknown }[]>`
+        SELECT ST_AsGeoJSON("gameBounds") AS "gameBounds"
+        FROM "Game"
+        WHERE "id" = ${matchedGame.id}
+      `
+      const gameBounds = GeoJSONPolygonSchema.parse(
+        gameBoundsQuery[0].gameBounds
+      )
       return {
         player: newPlayer,
-        game: matchedGame,
+        game: {
+          gameBounds,
+          ...matchedGame,
+        },
       }
     }),
 })
