@@ -3,6 +3,7 @@ import { Game } from "hide-and-squeak-server"
 import * as geojson from "geojson"
 import LeafletMap from "./LeafletMap"
 import { OSMFTileServerLayer } from "./mapLayers"
+import { LocateControl } from "leaflet.locatecontrol"
 
 function disallowedAreaPolygon(
   allowedArea: L.GeoJSON<any, geojson.Polygon>
@@ -41,6 +42,15 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
     fillOpacity: 0.2,
   })
 
+  const locateControl = new LocateControl({
+    strings: {
+      title: "Show location on map",
+    },
+    locateOptions: {
+      enableHighAccuracy: true,
+    },
+  })
+
   return (
     <>
       <LeafletMap
@@ -59,6 +69,8 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
           } catch (error) {
             debugger
           }
+          locateControl.addTo(map)
+          locateControl.start()
         }}
         class="h-full w-full"
       />

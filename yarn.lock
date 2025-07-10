@@ -3853,6 +3853,7 @@ __metadata:
     hide-and-squeak-server: "workspace:^"
     leaflet: "npm:^1.9.4"
     leaflet-draw: "npm:^1.0.4"
+    leaflet.locatecontrol: "npm:^0.84.2"
     tailwindcss: "npm:^4.1.11"
     typescript: "npm:^5.8.3"
     vite: "npm:^7.0.3"
@@ -4378,6 +4379,13 @@ __metadata:
   version: 1.0.4
   resolution: "leaflet-draw@npm:1.0.4"
   checksum: 10c0/9e700b7e5e7d70c0f9d66efe2fec282f635eff63699e5f2f4eb733b140188058cc7cb2a5d3c6889c300958ec9e415fd5c0a02a08db0e1fc13a063d4710cff004
+  languageName: node
+  linkType: hard
+
+"leaflet.locatecontrol@npm:^0.84.2":
+  version: 0.84.2
+  resolution: "leaflet.locatecontrol@npm:0.84.2"
+  checksum: 10c0/4f90df2fa7bd8482c5f449f37b7f99571e34c88306a83ec18a0084489876acd23def30e179226adf338747c2f3957fc921bff949e055b349f05c07a30a1d3cc1
   languageName: node
   linkType: hard
 

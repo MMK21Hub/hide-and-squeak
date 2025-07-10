@@ -27,6 +27,7 @@
     "daisyui": "^5.0.46",
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
+    "leaflet.locatecontrol": "^0.84.2",
     "tailwindcss": "^4.1.11",
     "voby": "^0.58.1"
   },

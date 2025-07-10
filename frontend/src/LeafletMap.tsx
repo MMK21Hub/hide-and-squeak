@@ -4,6 +4,7 @@ import { createDirective } from "voby"
 import "./leafletCustom.css"
 import "leaflet-draw"
 import "leaflet-draw/dist/leaflet.draw.css"
+import "leaflet.locatecontrol/dist/L.Control.Locate.min.css"
 
 const LeafletDirective = createDirective(
   "leaflet",
