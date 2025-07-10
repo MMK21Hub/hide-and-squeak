@@ -48,7 +48,7 @@ docker run --name has-dev-db \
 Enable the PostGIS extension for the database by opening a `psql` shell:
 
 ```bash
-docker exec -it has-dev-db psql -U postgres
+docker exec -it has-dev-db psql -U postgres -d hide-and-squeak
 ```
 
 Then run the following SQL command to enable PostGIS:
