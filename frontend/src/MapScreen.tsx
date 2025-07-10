@@ -50,12 +50,12 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
           map.setView([51, 0], 10)
           disallowedArea.addTo(map)
           try {
-            // For some reason, this call throws "can't access property "min", bounds is undefined"
-            // map.fitBounds(gameBounds.getBounds(), {
-            //   padding: [20, 20],
-            //   maxZoom: 18,
-            // })
-            map.panTo(gameBounds.getBounds().getCenter())
+            const bounds = gameBounds.getBounds()
+            console.log("Zooming to game bounds:", bounds)
+            map.fitBounds(bounds, {
+              padding: [10, 10],
+              maxZoom: 18,
+            })
           } catch (error) {
             debugger
           }
