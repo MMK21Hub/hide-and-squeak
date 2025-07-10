@@ -30,6 +30,12 @@ function BottomNavigation({ screens }: { screens: Screen[] }) {
   const screenFromHash = window.location.hash.slice(1)
   if (screenFromHash in screens) activeScreen(screenFromHash)
 
+  // Ensure Leaflet keeps rendering correctly when the screen changes
+  useEffect(() => {
+    activeScreen()
+    window.dispatchEvent(new Event("resize"))
+  })
+
   useEffect(() => {
     // This is a handler function for when the active screen changes
     const newActiveScreen = activeScreen()
