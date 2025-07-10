@@ -74,7 +74,7 @@ function GameScreen(): JSX.Element {
                 <input
                   required
                   type="text"
-                  class="input sm:w-md"
+                  class="input w-sm sm:w-md"
                   name="gameCode"
                   placeholder="8EGX"
                 />
@@ -84,7 +84,7 @@ function GameScreen(): JSX.Element {
                 <input
                   required
                   type="text"
-                  class="input sm:w-md"
+                  class="input w-sm sm:w-md"
                   name="username"
                   placeholder="Username"
                 />
@@ -100,7 +100,7 @@ function GameScreen(): JSX.Element {
                 <input
                   required
                   type="text"
-                  class="input sm:w-md"
+                  class="input w-sm sm:w-md"
                   name="gameName"
                   placeholder="Game name"
                 />
