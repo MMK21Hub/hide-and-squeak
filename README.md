@@ -34,7 +34,7 @@ By default, the app will be served on port 3010 (accessible at <http://localhost
 Any PostgreSQL database will do. I'd recommend spinning one up with Docker:
 
 ```bash
-docker run --name hide-and-squeak-db \
+docker run --name has-dev-db \
   -e POSTGRES_PASSWORD=postgres \
   -e POSTGRES_USER=postgres \
   -e POSTGRES_DB=hide-and-squeak \
