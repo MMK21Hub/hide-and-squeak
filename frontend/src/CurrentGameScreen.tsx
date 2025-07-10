@@ -1,7 +1,6 @@
 import { Game } from "hide-and-squeak-server"
 
 function CurrentGameScreen({ game }: { game: Game }): JSX.Element {
-  console.log("CurrentGameScreen", game)
   return (
     <div class="flex flex-col gap-2 h-full m-4">
       <h1 class="text-3xl mb-2">

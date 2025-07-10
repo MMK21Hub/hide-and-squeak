@@ -8,6 +8,7 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
     style: {
       color: "var(--color-error)",
       weight: 2,
+      fillColor: "transparent",
     },
   })
 
@@ -16,7 +17,6 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
       <LeafletMap
         onMount={(map) => {
           OSMFTileServerLayer().addTo(map)
-          console.debug(gameBounds, "gameBounds")
           gameBounds.addTo(map)
           map.fitBounds(gameBounds.getBounds(), {
             padding: [20, 20],

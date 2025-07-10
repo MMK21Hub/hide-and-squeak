@@ -21,8 +21,6 @@ function GameScreen(): JSX.Element {
       })
       .then((response) => {
         appState.currentGame = response.game
-        alert(`Joined game ${response.game.code}!
-Existing players: ${response.game.players.map((p) => p.name).join(", ")}`)
       })
       .catch((error: Error) => {
         console.error(error)
