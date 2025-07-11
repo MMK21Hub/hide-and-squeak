@@ -2,7 +2,8 @@
 
 ARG NODE_VERSION=24.1.0
 
-FROM node:${NODE_VERSION} AS builder
+# Always run the builder using the host architecture (for better performance)
+FROM --platform=$BUILDPLATFORM node:${NODE_VERSION} AS builder
 WORKDIR /app
 COPY . .
 RUN corepack enable
