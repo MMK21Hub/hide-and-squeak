@@ -29,7 +29,7 @@ fi
 # Preparations for multi-arch builds
 # See https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/
 echo "Setting up multi-arch builds with Docker BuildKit"
-builder_name=hide-and-squeak-builder
+export builder_name=hide-and-squeak-builder
 docker buildx create --use --name $builder_name
 
 # Install emulators
@@ -49,13 +49,13 @@ else
   fi
 fi
 
-docker buildx build -t mmk21/slime-hook:$version --platform linux/amd64,linux/arm64 --load .
+docker buildx build -t $image:$version --platform linux/amd64,linux/arm64 --load .
 if [[ $? -ne 0 ]]; then
   echo "Error: Docker build failed. See output above."
   exit 10
 fi
-docker tag mmk21/slime-hook:$version mmk21/slime-hook:latest
+docker tag $image:$version $image:latest
 
 echo "Uploading Docker images to Docker Hub"
-docker push mmk21/slime-hook:$version
-docker push mmk21/slime-hook:latest
+docker push $image:$version
+docker push $image:latest
