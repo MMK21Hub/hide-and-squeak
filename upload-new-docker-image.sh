@@ -20,19 +20,42 @@ if [[ $(git branch --show-current) != "main" ]]; then
   read -s
 fi
 
-if [[ $(git describe --tags) != "$version" ]]; then
+if [[ $(git describe --tag --abbrev=0) != "$version" ]]; then
   echo "Error: There is a more recent git tag than $version"
   echo "Check that the version number provided is correct."
   exit 3
 fi
 
-docker build -t mmk21/slime-hook:$VERSION --platform linux/amd64,linux/arm64 .
+# Preparations for multi-arch builds
+# See https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/
+echo "Setting up multi-arch builds with Docker BuildKit"
+builder_name=hide-and-squeak-builder
+docker buildx create --use --name $builder_name
+
+# Install emulators
+builder_platforms=$(docker buildx --builder hide-and-squeak-builder inspect | grep Platforms:)
+if [[ "$builder_platforms" == *"linux/amd64"* && "$builder_platforms" == *"linux/arm64"* ]]; then
+  echo "Skipping emulator installation because they are already available."
+else
+  echo "Installing emulators using the Binfmt tool"
+  # We don't need to install the emulator for the native architecture
+  arch=$(uname --machine)
+  if [[ "$arch" == "x86_64" ]]; then
+    docker run --privileged --rm tonistiigi/binfmt --install arm64
+  elif [[ "$arch" == "aarch64" ]]; then
+    docker run --privileged --rm tonistiigi/binfmt --install amd64
+  else
+    docker run --privileged --rm tonistiigi/binfmt --install arm64,amd64
+  fi
+fi
+
+docker buildx build -t mmk21/slime-hook:$version --platform linux/amd64,linux/arm64 --load .
 if [[ $? -ne 0 ]]; then
   echo "Error: Docker build failed. See output above."
   exit 10
 fi
-docker tag mmk21/slime-hook:$VERSION mmk21/slime-hook:latest
+docker tag mmk21/slime-hook:$version mmk21/slime-hook:latest
 
 echo "Uploading Docker images to Docker Hub"
-docker push mmk21/slime-hook:$VERSION
+docker push mmk21/slime-hook:$version
 docker push mmk21/slime-hook:latest
