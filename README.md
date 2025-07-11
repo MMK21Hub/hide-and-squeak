@@ -8,7 +8,8 @@ Currently a work in progress.
 
 ## Screenshots
 
-![Screenshot of the "Join a game" screen](screenshot.png)
+![Screenshot of the "Join game" screen](screenshots/join-game.png)
+![Screenshot of the "Create game" screen](screenshots/create-game.png)
 
 ## Deployment guide using Docker
 
