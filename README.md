@@ -13,13 +13,13 @@ Currently a work in progress.
 
 ## Deployment guide using Docker
 
-It's recommended to deploy Hide and Squeak using Docker (with Docker Compose).
+It's recommended to deploy Hide and Squeak using Docker (with Docker Compose). We'll be using the [`mmk21/hide-and-squeak-server`](https://hub.docker.com/r/mmk21/hide-and-squeak-server/) image, which supports x86_64 and ARM64 on Linux.
 
-1. Create a folder for the Docker Compose and config files, e.g. `mkdir hide-and-squeak`
-2. Download the production [`compose.yaml`](deployment/downloads/compose.yaml) file
-3. Download the [`env.example`](deployment/downloads/env.example) file
-4. Rename the `env.example` file to `.env`
-5. Edit the `.env` file, replacing the default database password with a randomly-generated one
+1. Create a folder for the Docker Compose and config files, e.g. `mkdir hide-and-squeak && cd hide-and-squeak`
+2. Download the production [`compose.yaml`](deployment/downloads/compose.yaml) file: `wget https://raw.githubusercontent.com/MMK21Hub/hide-and-squeak/main/deployment/downloads/compose.yaml`
+3. Download the [`example.env`](deployment/downloads/example.env) file: `wget https://raw.githubusercontent.com/MMK21Hub/hide-and-squeak/main/deployment/downloads/example.env`
+4. Rename the `example.env` file to `.env`: `mv example.env .env`
+5. Edit the `.env` file, replacing the default database password with a randomly-generated one (without special characters)
 6. Run `docker compose up -d` to start the containers
 7. Optional: Watch the logs with `docker compose logs -f` (the database will perform some initial migrations and then the server should start up after a few seconds)
 
