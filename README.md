@@ -92,13 +92,31 @@ Edit `backend/prisma/schema.prisma`. Then:
 - Run `yarn run db:push` to update the database
 - Run `yarn run db:studio` to examine the database contents using Prisma Studio (web UI)
 
-### Test the Dockerfile
+### Working with Docker
 
-1. Create a `.env` file in the root of the repo, using [`deployment/downloads/env.example`](deployment/downloads/env.example) as a template
+#### Test the Dockerfile locally
+
+1. Create a `.env` file in the root of the repo, using [`deployment/downloads/env.example`](deployment/downloads/env.example) as a template.
 1. In the root of the repo: `docker compose up --build`
 1. Hopefully it builds without errors and the app will work on port 3010
 
-### Publish the Docker image to Docker Hub
+#### Build a multi-platform image
+
+1. Set up a Docker BuildKit builder: `docker buildx create --use`
+2. Install required emulators: `docker run --privileged --rm tonistiigi/binfmt --install arm64` (for x86_64 machines)
+   - If you're on an ARM64 machine, you should install the `amd64` emulator instead
+   - If you're on another architecture, install both (`arm64,amd64`)
+3. Build it! `docker buildx build --platform linux/amd64,linux/arm64 --load .`
+
+#### Build a multi-platform image and upload it to Docker Hub
+
+1. Check the [tags already available on Docker Hub](https://hub.docker.com/r/mmk21/hide-and-squeak-server)
+2. Use the [`upload-new-docker-image.sh`](upload-new-docker-image.sh) script! E.g. `./upload-new-docker-image.sh v0.1.9`
+   - This will automatically perform the preparatory steps for multi-platform builds (as above), build the image, tag it, and upload it to Docker Hub
+
+#### Publish a single-platform Docker image to Docker Hub manually (not recommended)
+
+This process is no longer recommended, because you can now use the `upload-new-docker-image.sh` script to upload multi-platform images.
 
 1. Pick a version number: `export VERSION=v0.1.0`
 2. Build the image: `docker build -t mmk21/hide-and-squeak-server .`
