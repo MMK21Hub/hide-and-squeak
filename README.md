@@ -103,7 +103,7 @@ Edit `backend/prisma/schema.prisma`. Then:
 #### Build a multi-platform image
 
 1. Set up a Docker BuildKit builder: `docker buildx create --use`
-2. Install required emulators: `docker run --privileged --rm tonistiigi/binfmt --install arm64` (for x86_64 machines)
+2. Install required emulators: `docker run --privileged --rm tonistiigi/binfmt --install arm64` (if your local machine is x86_64)
    - If you're on an ARM64 machine, you should install the `amd64` emulator instead
    - If you're on another architecture, install both (`arm64,amd64`)
 3. Build it! `docker buildx build --platform linux/amd64,linux/arm64 --load .`
