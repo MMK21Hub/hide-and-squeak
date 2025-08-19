@@ -4,7 +4,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "../generated/prisma"
-  binaryTargets = ["native", "linux-musl-openssl-3.0.x"] // Adds support for running in an Alpine container
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x", "linux-musl-arm64-openssl-3.0.x"] // Adds support for running in an Alpine container
 }
 
 datasource db {
