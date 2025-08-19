@@ -12,7 +12,9 @@ services:
         restart: true
 
   db:
-    image: postgis/postgis:17-3.5
+    # We use imresamu's fork of the image because it has multiplatform support (for ARMv8)
+    # Feel free to switch to postgis/postgis if you'd prefer
+    image: imresamu/postgis:17-3.5
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
