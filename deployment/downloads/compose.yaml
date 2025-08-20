@@ -2,6 +2,7 @@
 services:
   server:
     image: mmk21/hide-and-squeak-server:latest
+    restart: unless-stopped
     ports:
       - 3010:3010
     environment:
@@ -15,6 +16,7 @@ services:
     # We use imresamu's fork of the image because it has multiplatform support (for ARMv8)
     # Feel free to switch to postgis/postgis if you'd prefer
     image: imresamu/postgis:17-3.5
+    restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
