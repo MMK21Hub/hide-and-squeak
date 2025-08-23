@@ -4,6 +4,7 @@ import { trpc } from "./trpc"
 import BoundaryDrawer from "./BoundaryDrawer"
 import { $, If, useMemo } from "voby"
 import { appState } from "./globalState"
+import BoundaryInput from "./BoundaryInput"
 
 function GameScreen(): JSX.Element {
   async function joinGame(event: SubmitEvent) {
@@ -109,6 +110,8 @@ function GameScreen(): JSX.Element {
               <h3 class="text-2xl text-primary font-bold mb-8">
                 Select game boundaries
               </h3>
+              <BoundaryInput boundaryGeoJSON={boundaryForNewGame} />
+              <hr class="my-6" />
               <BoundaryDrawer boundaryGeoJSON={boundaryForNewGame} />
               <div class="flex gap-4 items-center">
                 <button class="btn btn-primary" disabled={boundaryMissing}>
