@@ -101,7 +101,7 @@ function GameScreen(): JSX.Element {
                 <input
                   required
                   type="text"
-                  class="input w-sm sm:w-md"
+                  class="input w-sm max-w-[90vw] sm:w-md"
                   name="gameName"
                   placeholder="Game name"
                 />
