@@ -68,6 +68,10 @@ function GameScreen(): JSX.Element {
           </div>
           <TabContent name="join-game">
             <h2 class="text-4xl text-primary font-bold mb-8">Join a game</h2>
+            <p class="w-sm sm:w-md pb-4">
+              Just want to test the app? Use the demo game code{" "}
+              <code>4J1QH4</code>, or create your own game!
+            </p>
             <form onSubmit={joinGame}>
               <fieldset class="fieldset mb-4">
                 <legend class="fieldset-legend">Enter a game code</legend>
