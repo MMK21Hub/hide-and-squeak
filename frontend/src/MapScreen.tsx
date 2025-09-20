@@ -4,6 +4,8 @@ import * as geojson from "geojson"
 import LeafletMap from "./LeafletMap"
 import { OSMFTileServerLayer } from "./mapLayers"
 import { LocateControl } from "leaflet.locatecontrol"
+import { iconViewfinderCircle } from "./heroIcons"
+import { $ } from "voby"
 
 function disallowedAreaPolygon(
   allowedArea: L.GeoJSON<any, geojson.Polygon>
@@ -28,6 +30,24 @@ function disallowedAreaPolygon(
 }
 
 function MapScreen({ game }: { game: Game }): JSX.Element {
+  function zoomToBounds() {
+    try {
+      const map = theMap()
+      if (!map)
+        return console.warn("Map not ready yet, skipping zoom operation")
+      const bounds = gameBounds.getBounds()
+      console.log("Zooming to game bounds:", bounds)
+      map.fitBounds(bounds, {
+        padding: [10, 10],
+        maxZoom: 18,
+      })
+    } catch (error) {
+      debugger
+    }
+  }
+
+  const theMap = $<L.Map>()
+
   const gameBounds = L.geoJSON<any, geojson.Polygon>(game.gameBounds, {
     style: {
       color: "var(--color-error)",
@@ -57,25 +77,25 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
     <>
       <LeafletMap
         onMount={(map) => {
+          theMap(map)
           OSMFTileServerLayer().addTo(map)
           gameBounds.addTo(map)
           map.setView([51, 0], 10)
           disallowedArea.addTo(map)
-          try {
-            const bounds = gameBounds.getBounds()
-            console.log("Zooming to game bounds:", bounds)
-            map.fitBounds(bounds, {
-              padding: [10, 10],
-              maxZoom: 18,
-            })
-          } catch (error) {
-            debugger
-          }
+
           locateControl.addTo(map)
           locateControl.start()
         }}
         class="h-full w-full"
       />
+      <div class="fab absolute z-[10000] bottom-25 right-5">
+        <button
+          class="btn btn-lg btn-circle btn-primary"
+          onClick={zoomToBounds}
+        >
+          {iconViewfinderCircle}
+        </button>
+      </div>
     </>
   )
 }
