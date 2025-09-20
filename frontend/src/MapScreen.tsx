@@ -88,7 +88,10 @@ function MapScreen({ game }: { game: Game }): JSX.Element {
         }}
         class="h-full w-full"
       />
-      <div class="fab absolute z-[10000] bottom-25 right-5">
+      <div
+        class="fab absolute z-[10000] bottom-25 right-5 tooltip tooltip-left"
+        data-tip="Zoom to game area"
+      >
         <button
           class="btn btn-lg btn-circle btn-primary"
           onClick={zoomToBounds}
