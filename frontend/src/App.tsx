@@ -1,5 +1,5 @@
 import BottomNavigation from "./BottomNavigation"
-import CurrentGameScreen from "./CurrentGameScreen"
+import CurrentGameScreen from "./screens/game/CurrentGameScreen"
 import GameScreen from "./screens/game/GameScreen"
 import { appState } from "./globalState"
 import { iconMap, iconUserGroup } from "./heroIcons"
