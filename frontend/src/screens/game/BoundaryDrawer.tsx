@@ -1,6 +1,6 @@
 import L from "leaflet"
 import { Polygon as GeoJSONPolygon } from "geojson"
-import LeafletMap from "../../LeafletMap"
+import LeafletMap from "../../components/LeafletMap"
 import { OSMFTileServerLayer } from "../../mapLayers"
 import { $, Observable, useEffect } from "voby"
 

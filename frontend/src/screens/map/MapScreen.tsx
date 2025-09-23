@@ -1,10 +1,10 @@
 import L, { LatLng, LatLngExpression } from "leaflet"
 import { Game } from "hide-and-squeak-server"
 import * as geojson from "geojson"
-import LeafletMap from "../../LeafletMap"
+import LeafletMap from "../../components/LeafletMap"
 import { OSMFTileServerLayer } from "../../mapLayers"
 import { LocateControl } from "leaflet.locatecontrol"
-import { iconViewfinderCircle } from "../../heroIcons"
+import { iconViewfinderCircle } from "../../components/heroIcons"
 import { $ } from "voby"
 
 

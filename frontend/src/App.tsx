@@ -1,10 +1,10 @@
-import BottomNavigation from "./BottomNavigation"
+import BottomNavigation from "./components/BottomNavigation"
 import CurrentGameScreen from "./screens/game/CurrentGameScreen"
 import GameScreen from "./screens/game/GameScreen"
 import { appState } from "./globalState"
-import { iconMap, iconUserGroup } from "./heroIcons"
+import { iconMap, iconUserGroup } from "./components/heroIcons"
 import MapScreen from "./screens/map/MapScreen"
-import TopAppBar from "./TopAppBar"
+import TopAppBar from "./components/TopAppBar"
 
 function App(): JSX.Element {
   return (
