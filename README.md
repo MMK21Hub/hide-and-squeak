@@ -27,8 +27,9 @@ By default, the app will be served on port 3010 (accessible at <http://localhost
 
 ## Development setup
 
-1. Clone the repository
-2. `yarn install` in the repository's directory
+1. Clone the repository and change into the repository's directory
+2. Run `yarn install`
+3. Run `yarn run db:generate`
 
 ### Start the database
 
@@ -60,9 +61,9 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 Exit the shell.
 
-### Create a `.env` file for the backend
+### Adjust the `.env` file for the backend
 
-Create the file `backend/.env` and use it to specify configuration for your development environment:
+Adjust the `backend/.env` file to match the database in your development environment. If you used the exact command above, you can keep the default.
 
 ```bash
 # Adjust if you're using a different database setup to the one above
