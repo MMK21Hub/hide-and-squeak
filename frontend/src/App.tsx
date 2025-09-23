@@ -1,9 +1,9 @@
 import BottomNavigation from "./BottomNavigation"
 import CurrentGameScreen from "./CurrentGameScreen"
-import GameScreen from "./GameScreen"
+import GameScreen from "./screens/game/GameScreen"
 import { appState } from "./globalState"
 import { iconMap, iconUserGroup } from "./heroIcons"
-import MapScreen from "./MapScreen"
+import MapScreen from "./screens/map/MapScreen"
 import TopAppBar from "./TopAppBar"
 
 function App(): JSX.Element {

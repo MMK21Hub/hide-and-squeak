@@ -1,7 +1,7 @@
 import L from "leaflet"
 import { Polygon as GeoJSONPolygon } from "geojson"
-import LeafletMap from "./LeafletMap"
-import { OSMFTileServerLayer } from "./mapLayers"
+import LeafletMap from "../../LeafletMap"
+import { OSMFTileServerLayer } from "../../mapLayers"
 import { $, Observable, useEffect } from "voby"
 
 function BoundaryDrawer(props: {

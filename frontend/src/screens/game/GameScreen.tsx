@@ -1,9 +1,9 @@
 import { Polygon, Position } from "geojson"
-import { TabButton, TabContent, Tabs } from "./tabs"
-import { trpc } from "./trpc"
+import { TabButton, TabContent, Tabs } from "../../tabs"
+import { trpc } from "../../trpc"
 import BoundaryDrawer from "./BoundaryDrawer"
 import { $, If, useMemo } from "voby"
-import { appState } from "./globalState"
+import { appState } from "../../globalState"
 
 function GameScreen(): JSX.Element {
   async function joinGame(event: SubmitEvent) {

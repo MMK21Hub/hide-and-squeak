@@ -1,11 +1,12 @@
 import L, { LatLng, LatLngExpression } from "leaflet"
 import { Game } from "hide-and-squeak-server"
 import * as geojson from "geojson"
-import LeafletMap from "./LeafletMap"
-import { OSMFTileServerLayer } from "./mapLayers"
+import LeafletMap from "../../LeafletMap"
+import { OSMFTileServerLayer } from "../../mapLayers"
 import { LocateControl } from "leaflet.locatecontrol"
-import { iconViewfinderCircle } from "./heroIcons"
+import { iconViewfinderCircle } from "../../heroIcons"
 import { $ } from "voby"
+
 
 function disallowedAreaPolygon(
   allowedArea: L.GeoJSON<any, geojson.Polygon>
