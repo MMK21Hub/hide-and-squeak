@@ -136,6 +136,46 @@ const appRouter = router({
         },
       }
     }),
+  leaveGame: publicProcedure
+    .input(
+      z.object({
+        playerId: z.string().min(1).max(1000),
+        gameId: z.string().min(1).max(1000),
+        playerName: z.string().min(1),
+      })
+    )
+    .mutation(async ({ input }) => {
+      const { playerId, gameId, playerName } = input
+      const matchedGame = await prisma.game.findUnique({
+        where: { id: gameId },
+        include: {
+          players: true,
+        },
+      })
+      if (!matchedGame)
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `Game with ID "${gameId}" not found`,
+        })
+      const playerToRemove = matchedGame.players.find(
+        (player) => player.id === playerId
+      )
+      if (!playerToRemove)
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: `Player with ID "${playerId}" not found in game`,
+        })
+      // "security" (players need their ID number and name to be removed)
+      if (playerToRemove.name !== playerName)
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: `Player name does not match the ID provided`,
+        })
+      await prisma.player.delete({
+        where: { id: playerId },
+      })
+      return // success
+    }),
 })
 
 const app = express()
