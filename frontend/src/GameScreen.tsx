@@ -21,6 +21,7 @@ function GameScreen(): JSX.Element {
       })
       .then((response) => {
         appState.currentGame = response.game
+        appState.player = response.player
       })
       .catch((error: Error) => {
         console.error(error)

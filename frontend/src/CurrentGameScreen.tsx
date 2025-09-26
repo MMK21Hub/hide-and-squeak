@@ -1,6 +1,24 @@
-import { Game } from "hide-and-squeak-server"
+import { Game, Player } from "hide-and-squeak-server"
+import { trpc } from "./trpc"
+import { appState } from "./globalState"
 
-function CurrentGameScreen({ game }: { game: Game }): JSX.Element {
+function CurrentGameScreen({
+  game,
+  player,
+}: {
+  game: Game
+  player: Player
+}): JSX.Element {
+  async function leaveGame() {
+    await trpc.leaveGame.mutate({
+      gameId: game.id,
+      playerId: player.id,
+      playerName: player.name,
+    })
+    appState.currentGame = null
+    appState.player = null
+  }
+
   return (
     <div class="flex flex-col gap-2 h-full m-4">
       <h1 class="text-3xl mb-2">
@@ -32,6 +50,9 @@ function CurrentGameScreen({ game }: { game: Game }): JSX.Element {
       <p class="">
         Game active: <strong>{game.active ? "Yes" : "No"}</strong>
       </p>
+      <button class="btn btn-error w-fit mt-6" onClick={leaveGame}>
+        Leave Game
+      </button>
     </div>
   )
 }

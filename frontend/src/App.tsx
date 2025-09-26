@@ -15,7 +15,12 @@ function App(): JSX.Element {
           <div class="screen @container" data-screen="game" id="active-screen">
             {() => {
               const game = appState.currentGame
-              return game ? <CurrentGameScreen game={game} /> : <GameScreen />
+              const player = appState.player
+              return game && player ? (
+                <CurrentGameScreen game={game} player={player} />
+              ) : (
+                <GameScreen />
+              )
             }}
           </div>
           <div class="screen" data-screen="map">
