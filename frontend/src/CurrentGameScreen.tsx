@@ -33,7 +33,7 @@ function CurrentGameScreen({
         Game code: <strong>{game.code.toUpperCase()}</strong>
       </p>
       <p class="">
-        Players:{" "}
+        Other players:{" "}
         <strong>{game.players.map((player) => player.name).join(", ")}</strong>
       </p>
       <p class="">
